@@ -1,4 +1,5 @@
 A parser for the input langauge of a desktop calculator. Build the
 parser by running "./build.sh". Then run the executable by running
-"./calc".
+"./calc". Now enter arithemtic expressions such as "67", "67 + 686",
+and so on, and see the AST printed back.
 
