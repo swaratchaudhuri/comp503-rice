@@ -1,5 +1,9 @@
 /* File parser.mly */
 
+%{
+open Calcast
+%}
+
 %token <int> INT
 %token PLUS MINUS TIMES DIV
 %token LPAREN RPAREN
@@ -8,7 +12,7 @@
 %left TIMES DIV         /* medium precedence */
 %nonassoc UMINUS        /* highest precedence */
 %start main             /* the entry point */
-%type <int> main
+%type <Calcast.exp> main
 %%
 
 main:
@@ -16,11 +20,11 @@ main:
 ;
 
 expr:
-	INT                     { $1 }
+	INT                     { Int_const $1 }
 	| LPAREN expr RPAREN      { $2 }
-	| expr PLUS expr          { $1 + $3 }
-	| expr MINUS expr         { $1 - $3 }
-	| expr TIMES expr         { $1 * $3 }
-	| expr DIV expr           { $1 / $3 }
-	| MINUS expr %prec UMINUS { - $2 }
+	| expr PLUS expr          { Sum_exp ($1, $3) }
+	| expr MINUS expr         { Diff_exp ($1, $3) }
+	| expr TIMES expr         { Mult_exp ($1, $3) }
+	| expr DIV expr           { Div_exp ($1, $3) }
+	| MINUS expr %prec UMINUS { Unary_minus_exp ($2) }
 ;
