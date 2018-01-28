@@ -1,0 +1,4 @@
+A parser for the input langauge of a desktop calculator. Build the
+parser by running "./build.sh". Then run the executable by running
+"./calc".
+
